@@ -1,1 +1,2 @@
 #cmakedefine MAPNIK_PLUGINDIR "${MAPNIK_PLUGINDIR}"
+#define SAMPLE_DIR "${PROJECT_SOURCE_DIR}/sample"
