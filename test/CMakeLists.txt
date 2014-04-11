@@ -15,10 +15,10 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 add_executable(mapnik_c_api_test c-api-test.cpp)
 
 add_dependencies(mapnik_c_api_test
-  mapnik_c_api
+  mapnik_c
 )
 target_link_libraries(mapnik_c_api_test
-  mapnik_c_api
+  mapnik_c
   ${MAPNIK_LIBRARIES}
 )
 

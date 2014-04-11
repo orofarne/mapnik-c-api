@@ -20,13 +20,13 @@ set(CMAKE_SHARED_LINKER_FLAGS ${MAPNIK_LDFLAGS})
 
 # Build
 # Dynamic library
-add_library(mapnik_c_api SHARED mapnik_c_api.cpp)
-target_link_libraries(mapnik_c_api ${MAPNIK_LIBRARIES})
+add_library(mapnik_c SHARED mapnik_c_api.cpp)
+target_link_libraries(mapnik_c ${MAPNIK_LIBRARIES})
 
 # Static library
 if(STATICLIB)
-  add_library(mapnik_c_api_static STATIC mapnik_c_api.cpp)
-  target_link_libraries(mapnik_c_api ${MAPNIK_LIBRARIES})
+  add_library(mapnik_c_static STATIC mapnik_c_api.cpp)
+  target_link_libraries(mapnik_c_static ${MAPNIK_LIBRARIES})
 endif(STATICLIB)
 
 if(TESTS)
