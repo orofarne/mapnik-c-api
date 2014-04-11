@@ -7,9 +7,17 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 OPTION(TESTS "enable_testing" ON)
 OPTION(STATICLIB "build_static_library" OFF)
 
-# Setup boost
-find_package( Boost 1.48.0 REQUIRED )
+# Boost
+find_package(Boost 1.48.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
+
+# ICU
+find_package(ICU REQUIRED)
+include_directories(${ICU_INCLUDE_DIRS})
+
+# Cairo
+find_package(Cairo REQUIRED)
+include_directories(${CAIRO_INCLUDE_DIRS})
 
 # Setup mapnik
 find_package( Mapnik REQUIRED)
