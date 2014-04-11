@@ -10,7 +10,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "test/c-api-test-cfg.h"
+#include "c-api-test-cfg.h"
 
 TEST_CASE( "map/srs", "should get/set srs string" ) {
       mapnik_map_t * map;
@@ -27,7 +27,7 @@ TEST_CASE( "map/load", "should load xml" ) {
       mapnik_map_t * map;
       map = mapnik_map(256,256);
       mapnik_register_datasources(MAPNIK_PLUGINDIR, NULL);
-      REQUIRE_FALSE(mapnik_map_load(map,"sample/stylesheet.xml"));
+      REQUIRE_FALSE(mapnik_map_load(map,"../sample/stylesheet.xml"));
       mapnik_map_free(map);
 }
 
@@ -35,7 +35,7 @@ TEST_CASE( "map/render", "should render png" ) {
       mapnik_map_t * map;
       map = mapnik_map(256,256);
       mapnik_register_datasources(MAPNIK_PLUGINDIR, NULL);
-      REQUIRE_FALSE(mapnik_map_load(map,"sample/stylesheet.xml"));
+      REQUIRE_FALSE(mapnik_map_load(map,"../sample/stylesheet.xml"));
       mapnik_map_zoom_all(map);
       mapnik_map_render_to_file(map,"/tmp/mapnik-c-api-test-map1.png");
       printf("\x1b[1;32m ✓ (%s)\x1b[0m\n", "rendered to /tmp/mapnik-c-api-test-map1.png");
@@ -46,7 +46,7 @@ TEST_CASE( "map/render_to_mem", "should render png in memory" ) {
       mapnik_map_t * map;
       map = mapnik_map(1024,1024);
       mapnik_register_datasources(MAPNIK_PLUGINDIR, NULL);
-      REQUIRE_FALSE(mapnik_map_load(map,"sample/stylesheet.xml"));
+      REQUIRE_FALSE(mapnik_map_load(map,"../sample/stylesheet.xml"));
       mapnik_map_zoom_to_box(map, mapnik_bbox(0, 0, 5000000, 5000000));
       mapnik_image_t * i = mapnik_map_render_to_image(map);
       mapnik_image_blob_t * b = mapnik_image_to_png_blob(i);
@@ -67,12 +67,12 @@ TEST_CASE( "map/last_error", "should return errors" ) {
       error = mapnik_map_last_error(map);
       REQUIRE( NULL==error );
 
-      REQUIRE( -1==mapnik_map_load(map,"sample/doesnotexist.xml") );
+      REQUIRE( -1==mapnik_map_load(map,"../sample/doesnotexist.xml") );
       error = mapnik_map_last_error(map);
       REQUIRE( NULL!=strstr(error, "does not exist") );
       REQUIRE( NULL!=strstr(error, "sample/doesnotexist.xml") );
 
-      REQUIRE_FALSE(mapnik_map_load(map,"sample/missing_attribute.xml"));
+      REQUIRE_FALSE(mapnik_map_load(map,"../sample/missing_attribute.xml"));
       // successful load resets last_error
       error = mapnik_map_last_error(map);
       REQUIRE( NULL==error );
