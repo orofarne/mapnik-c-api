@@ -87,6 +87,12 @@ else (MAPNIK_LIBRARIES AND MAPNIK_INCLUDE_DIRS)
     execute_process(COMMAND mapnik-config --libs OUTPUT_VARIABLE MAPNIK_LDFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
     execute_process(COMMAND mapnik-config --input-plugins OUTPUT_VARIABLE MAPNIK_PLUGINDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
     message(STATUS "Mapnik default plugin path: ${MAPNIK_PLUGINDIR}")
+    execute_process(COMMAND mapnik-config --includes OUTPUT_VARIABLE MAPNIK_INCLUDE_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+    string(REPLACE " " ";" MAPNIK_INCLUDE_FLAG_LIST ${MAPNIK_INCLUDE_FLAGS})
+    foreach(INCLUDEFLAG ${MAPNIK_INCLUDE_FLAG_LIST})
+        string(REPLACE "-I" "" INCLUDEPATH ${INCLUDEFLAG})
+        set(MAPNIK_INCLUDE_DIRS ${MAPNIK_INCLUDE_DIRS} ${INCLUDEPATH})
+    endforeach(INCLUDEFLAG)
   endif (MAPNIK_CONFIG)
 
   # show the variables only in the advanced view

@@ -21,7 +21,7 @@ include_directories(${CAIRO_INCLUDE_DIRS})
 
 # Setup mapnik
 find_package( Mapnik REQUIRED)
-include_directories(MAPNIK_INCLUDE_DIRS)
+include_directories(${MAPNIK_INCLUDE_DIRS})
 set(CMAKE_CXX_FLAGS ${MAPNIK_CXXFLAGS})
 set(CMAKE_MODULE_LINKER_FLAGS ${MAPNIK_LDFLAGS})
 set(CMAKE_SHARED_LINKER_FLAGS ${MAPNIK_LDFLAGS})
